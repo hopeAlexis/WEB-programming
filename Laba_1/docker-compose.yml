@@ -8,8 +8,8 @@ services:
       - ./Code:/Code
       - ./site.conf:/etc/nginx/conf.d/site.conf
     links:
-      - nadia_php
-  nadia_php:
+      - php
+  php:
     image: php:8.3-fpm
     volumes:
       - ./Code:/Code
