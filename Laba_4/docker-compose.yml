@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./code:/code
+            - ./site.conf:/etc/nginx/conf.d/site.conf:ro
+        links:
+            - php
+            - ./code:/code
+            - ./site.conf:/etc/nginx/conf.d/site.conf
+            - ./vendor:/var/www/html/code/vendor
+    php:
+        image: php:8.3-fpm
+        build:
+            context: .
+        volumes:
+            - ./code:/code
+            - ./vendor:/var/www/html/vendor

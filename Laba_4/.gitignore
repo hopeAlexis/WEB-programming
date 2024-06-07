@@ -1,0 +1,7 @@
+$ cat .gitignore
+.vs
+*.[oa]
+*~
+*.exe
+.idea
+vendor
