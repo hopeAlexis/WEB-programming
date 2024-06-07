@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./code:/code
+      - ./site.conf:/etc/nginx/conf.d/site.conf:ro
+    depends_on:
+      - php
+    networks:
+      - default
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./code:/code
+    depends_on:
+      - dp
+    networks:
+      - default
+
+  dp:
+    image: mysql:8.0
+    ports:
+      - "6603:3306"
+    environment:
+      MYSQL_DATABASE: web
+      MYSQL_ROOT_PASSWORD: helloworld
+    networks:
+      - default
+
+networks:
+  default:
